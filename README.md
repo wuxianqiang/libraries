@@ -7,7 +7,8 @@
 ## 代码
 
 ```js
-        Array.prototype.unique = function unique() {
+        //数组去重
+        Array.prototype.unique = function unique() {
             var obj = {};
             for (var i = 0; i < this.length; i++) {
                 var current = this[i];
@@ -22,8 +23,8 @@
             obj = null;
             return this;
         }
-        
-        Array.prototype.bubbleSort = function bubbleSort() {
+        //冒泡排序
+        Array.prototype.bubbleSort = function bubbleSort() {
             var temp = null;
             for (var i = 0; i < this.length - 1; i++) {
                 for (var k = 0; k < this.length - 1 - i; k++) {
@@ -36,4 +37,20 @@
             }
             return this;
         }
+        //原型练习题
+        function Fn(num) {
+            this.x = this.y = num;
+        }
+        Fn.prototype = {
+            x: 20,
+            sum: function () {
+                console.log(this.x + this.y);
+            }
+        }
+
+        var f = new Fn(10);
+        console.log(f.sum === Fn.prototype.sum); // ture
+        f.sum(); //10+10=20
+        Fn.prototype.sum(); //20+undefined=NaN
+        console.log(f.constructor); //Object
 ```
