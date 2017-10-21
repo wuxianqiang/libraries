@@ -1,9 +1,18 @@
 # libraries
-方法库
+## 方法库
 1. 原生JS实现简易动画库 [仿jQuery实现动画的方法](https://github.com/wuxianqiang/libraries/blob/animate/animate/animate.js)
 2. 原生JS实现DOM操作方法库  [仿jQuery操作DOM的方法](https://github.com/wuxianqiang/libraries/blob/dom/dom/dom.js)
 3. 原生JS实现处理DOM2事件库兼容库 [仿jQuery绑定事件的方法](https://github.com/wuxianqiang/libraries/blob/event/event/event.js)
 
+## jQuery源码解读
+1. selector: [string]选择器的类型,[object]JS原生对象（把原生的对象转换为jQuery对象），[function]回掉函数（等级于$(document).ready...）
+2. context: 默认document(如果传递的是一个JS原生对象，更够修改上下文，如果是一个jQuery对象，默认会重构为选择器)
+
+```js
+var jQuery = function (selector, context) {
+    return new jQuery.fn.init(selector, context);
+}
+```
 ## 代码
 
 ```js
