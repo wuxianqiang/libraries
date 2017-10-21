@@ -1,8 +1,8 @@
 # libraries
 方法库
-1. 原生JS实现简易动画库
-2. 原生JS实现DOM操作方法库  [仿jQuery操作DOM的方法](https://github.com/wuxianqiang/libraries/blob/animate/animate/animate.js)
-3. 原生JS实现处理DOM2事件库兼容库
+1. 原生JS实现简易动画库 [仿jQuery实现动画的方法](https://github.com/wuxianqiang/libraries/blob/animate/animate/animate.js)
+2. 原生JS实现DOM操作方法库  [仿jQuery操作DOM的方法](https://github.com/wuxianqiang/libraries/blob/dom/dom/dom.js)
+3. 原生JS实现处理DOM2事件库兼容库 [仿jQuery绑定事件的方法](https://github.com/wuxianqiang/libraries/blob/event/event/event.js)
 
 ## 代码
 
