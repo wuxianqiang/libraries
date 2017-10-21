@@ -13,6 +13,7 @@
 ```js
 var jQuery = function (selector, context) {
     return new jQuery.fn.init(selector, context);
+    // $()都是创建这个类的实例
 }
 ```
 ## 代码
