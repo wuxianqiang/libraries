@@ -37,6 +37,16 @@
             }
             return this;
         }
+        //match方法
+        String.prototype.mymatch = function (reg) {
+         var ary = [];
+         var res = reg.exec(this);
+         while (res) {
+            ary.push(res[0]);
+            res = reg.exec(this);
+         }
+         return ary;
+        }
         //原型练习题
         function Fn(num) {
             this.x = this.y = num;
