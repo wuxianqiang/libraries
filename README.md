@@ -32,6 +32,23 @@ var jQuery = function (selector, context) {
         }
 ```
 
+## 仿ECMAScript5中Object.keys()函数
+
+```js
+        function keys(obj) {
+            if (typeof obj !== "object") {
+                throw TypeError();
+            }
+            var result = [];
+            for (var prop in obj) {
+                if (obj.hasOwnProperty(prop)) {
+                    result.push(prop);
+                }
+            }
+            return result;
+        }
+```
+
 ## 代码
 
 ```js
