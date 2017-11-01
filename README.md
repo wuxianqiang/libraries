@@ -76,4 +76,18 @@ var jQuery = function (selector, context) {
         var ary = [];
         for(var i = 0; i < 6; ary[i++] = i); /* empty */
         console.log(ary); // => [ 1, 2, 3, 4, 5, 6 ]
+        
+        //仿ECMAScript5定义的Object.keys()方法
+        function keys(obj) {
+            if (typeof obj !== "object") {
+                throw TypeError();
+            }
+            var result = [];
+            for (var prop in obj) {
+                if (obj.hasOwnProperty(prop)) {
+                    result.push(prop);
+                }
+            }
+            return result;
+        }
 ```
