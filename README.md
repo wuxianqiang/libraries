@@ -13,6 +13,25 @@ var jQuery = function (selector, context) {
     // $()都是创建这个类的实例
 }
 ```
+## 仿ECMAScript5中Object.create()函数
+```js
+        function inherit(p) {
+            if (p === null) {
+                throw TypeError()
+            }
+            if (Object.create) {
+                return Object.create(p)
+            }
+            var t = typeof p;
+            if (t !== "object" && t !== "function") {
+                throw TypeError()
+            }
+            function Fn() {};
+            Fn.prototype = p;
+            return new Fn()
+        }
+```
+
 ## 代码
 
 ```js
