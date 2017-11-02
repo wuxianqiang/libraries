@@ -346,9 +346,8 @@ function makeSortable(table) {
  *请使用这行代码：
  *.TOCSectNum{display:none}
  *
- *这个模块需要onLoad()工具函数
  **/
-onLoad(function () { //匿名函数定义了一个局部作用域
+(function () { //匿名函数定义了一个局部作用域
     //查找TOC容器元素
     //如果不存在，则在文档开头处创建一个
     var toc = document.getElementById("TOC");
@@ -402,6 +401,6 @@ onLoad(function () { //匿名函数定义了一个局部作用域
         entry.appendChild(link); //该div添加到TOC容器中
         toc.appendChild(entry);
     }
-});
+}());
 ```
 **[⬆ back to top](#readme)**
