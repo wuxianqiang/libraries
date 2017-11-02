@@ -68,7 +68,7 @@
         }
 ```
 
-## 数据类型检测，特殊情况处理特殊处理
+## 数据类型检测，特殊情况特殊处理
 
 ```js
         function classOf(obj) {
@@ -108,7 +108,7 @@
         }
 ```
 
-## ECMAScript3版本的Function.bind()方法
+## 仿ECMAScript5中Function.bind()函数
 
 ```js
         if (!Function.prototype.bind) {
@@ -126,7 +126,7 @@
         }
 ```
 
-## ECMAScript3版本中实现Array.map()方法
+## 仿ECMAScript5中Array.map()函数
 
 ```js
         var map = Array.prototype.map ? function (ary, fn) {
@@ -181,7 +181,7 @@
 
 ```
 
-## 仿match方法
+## 仿String.match()方法实现
 
 ```js
         String.prototype.mymatch = function (reg) {
