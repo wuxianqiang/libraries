@@ -31,6 +31,22 @@ var jQuery = function (selector, context) {
             return new Fn()
         }
 ```
+## 在数组ary中查找所有出现的元素ele，并返回一个包含匹配索引的数组
+
+```js
+        function findAll(ary, ele) {
+            var results = [],
+                len = a.length,
+                pos = 0;
+            while (pos < len) {
+                pos = ary.indexOf(ele, pos);
+                if (pos === -1) break;
+                results.push(pos);
+                pos++;
+            }
+            return results;
+        }
+```
 
 ## 仿ECMAScript5中Object.keys()函数
 
