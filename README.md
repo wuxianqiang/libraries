@@ -243,3 +243,36 @@ function sibling(ele, n) {
     return ele;
 }
 ```
+
+## 返回元素的第n个子代元素
+
+```js
+/**
+ *返回元素ele的第n代子元素，如果不存在则为null
+ *负值n代表从后往前计数。0表示第一个子元素，而-1代表最后一个，-2代表倒数第二个，依次类推
+ */
+function child(ele, n) {
+    if (ele.children) { //如果children数组存在
+        if (n < 0) n += ele.children.length; //转换负的n为数组索引
+        if (n < 0) return null; //如果它仍然为负，说明没有子元素
+        return ele.children[n]; //返回指定的子元素
+    }
+    //如果e没有children数组，找到第一个子元素并向前数，或找到最后一个子元素并往回数
+    if (n >= 0) { //n非负：从第一个子元素向前数
+        //找到元素e的第一个子元素
+        if (ele.firstElementChild) {
+            ele = ele.firstElementChild;
+        } else {
+            for (ele = ele.firstChild; ele && ele.nodeType !== 1; ele = ele.nextSibling) /*空循环*/;
+        }
+        return sibling(ele, n); //返回第一个子元素的第n个兄弟元素
+    } else { //n为负：从最后一个子元素往回数
+        if (ele.lastElementChild) {
+            ele = ele.lastElementChild;
+        } else {
+            for (ele = ele.lastChild; ele && ele.nodeType !== 1; ele = ele.previousSibling) /*空循环*/;
+        }
+        return sibling(ele, n + 1); //+1来转化最后1个子元素为最后1个兄弟元素
+    }
+}
+```
