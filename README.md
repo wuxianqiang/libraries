@@ -20,6 +20,7 @@
 - [从URL解析参数](#从url解析参数)
 - [获取纯文本的元素内容](#获取纯文本的元素内容)
 - [手写一个JSONP实现](#手写一个jsonp实现)
+- [插入节点](#插入节点)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
@@ -487,3 +488,17 @@ function loadasync(url) {
 }
 ```
 **[⬆ back to top](#readme)**
+## 插入节点
+
+```js
+//将child节点插入到parent中，使其成为第n个子节点
+function insertAt(parent, child, n) {
+    if (n < 0 || n > parent.childNodes.length) {
+        throw new Error("invalid index");
+    } else if (n == parent.childNodes.length) {
+        parent.appendChild(child);
+    } else {
+        parent.insertBefore(child, parent.childNodes[n]);
+    }
+}
+```
