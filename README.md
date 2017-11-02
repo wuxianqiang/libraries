@@ -1,6 +1,8 @@
 # libraries
 
 # 目录
+- [仿ECMAScript5中Object.create()函数](#仿ECMAScript5中Object.create()函数)
+- [仿ECMAScript5中Array.reduce()函数](#仿ECMAScript5中Array.reduce()函数)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
@@ -50,7 +52,7 @@
             return accumulator;
         }
 ```
-
+**[⬆ back to top](#readme)**
 ## 在数组中查找所有出现的元素方法
 
 ```js
@@ -67,7 +69,7 @@
             return results;
         }
 ```
-
+**[⬆ back to top](#readme)**
 ## 数据类型检测，特殊情况特殊处理
 
 ```js
@@ -77,8 +79,7 @@
             return Object.prototype.toString.call(obj).slice(8, -1);
         }
 ```
-
-
+**[⬆ back to top](#readme)**
 ## 仿ECMAScript5中Object.keys()函数
 
 ```js
@@ -95,7 +96,7 @@
             return result;
         }
 ```
-
+**[⬆ back to top](#readme)**
 ## 仿Math.max方法（不定实参函数）
 
 ```js
@@ -107,7 +108,7 @@
             return max;
         }
 ```
-
+**[⬆ back to top](#readme)**
 ## 仿ECMAScript5中Function.bind()函数
 
 ```js
@@ -125,7 +126,7 @@
             }
         }
 ```
-
+**[⬆ back to top](#readme)**
 ## 仿ECMAScript5中Array.map()函数
 
 ```js
@@ -141,7 +142,7 @@
             return results;
         }
 ```
-
+**[⬆ back to top](#readme)**
 ## 数组去重
 
 ```js
@@ -161,7 +162,7 @@
             return this;
         }
 ```
-
+**[⬆ back to top](#readme)**
 ## 冒泡排序
 
 ```js
@@ -180,7 +181,7 @@
         }
 
 ```
-
+**[⬆ back to top](#readme)**
 ## 仿String.match()方法实现
 
 ```js
@@ -194,6 +195,7 @@
          return ary;
         }
 ```
+**[⬆ back to top](#readme)**
 ## 返回元素的第n层祖先元素
 
 ```js
@@ -212,7 +214,7 @@
             return ele;
         }
 ```
-
+**[⬆ back to top](#readme)**
 ## 返回元素的第n个兄弟元素
 
 ```js
@@ -243,7 +245,7 @@ function sibling(ele, n) {
     return ele;
 }
 ```
-
+**[⬆ back to top](#readme)**
 ## 返回元素的第n个子代元素
 
 ```js
@@ -276,6 +278,7 @@ function child(ele, n) {
     }
 }
 ```
+**[⬆ back to top](#readme)**
 ## 表格的行排序
 
 ```js
@@ -317,4 +320,5 @@ function makeSortable(table) {
     }
 }
 ```
+**[⬆ back to top](#readme)**
 
