@@ -70,6 +70,18 @@ var jQuery = function (selector, context) {
         }
 ```
 
+## 仿Math.max方法（不定实参函数）
+
+```js
+        function max() {
+            var max = Number.NEGATIVE_INFINITY;
+            for (var i = 0; i < arguments.length; i++) {
+                if (arguments[i] > max) max = arguments[i];
+            }
+            return max;
+        }
+```
+
 ## 代码
 
 ```js
