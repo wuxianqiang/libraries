@@ -82,6 +82,24 @@ var jQuery = function (selector, context) {
         }
 ```
 
+## ECMAScript3版本的Function.bind()方法
+
+```js
+        if (!Function.prototype.bind) {
+            Function.prototype.bind = function (obj) {
+                var self = this,
+                    boundArgs = arguments;
+                return function () {
+                    var args = [],
+                        i;
+                    for (i = 1; i < boundArgs.length; i++) args.push(boundArgs[i]);
+                    for (i = 1; i < arguments.length; i++) args.push(arguments[i]);
+                    return self.apply(obj, args);
+                }
+            }
+        }
+```
+
 ## 代码
 
 ```js
