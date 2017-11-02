@@ -1,20 +1,7 @@
 # libraries
+
 # 目录
 
-
-## jQuery源码解读
-
-1. selector: [string]选择器的类型,[object]JS原生对象（把原生的对象转换为jQuery对象），[function]回掉函数（等级于$(document).ready...）
-2. context: 默认document(如果传递的是一个JS原生对象，更够修改上下文，如果是一个jQuery对象，默认会重构为选择器)
-3. jQuery选择器是创建一个jQuery的一个实例，所以$(#box)===$(#box)返回false，所以每次获取选择器最好用变量存储起来。
-4. $.ajax(),把jQuery作为普通函数执行，使用它自己属性上提供的一写方法
-
-```js
-var jQuery = function (selector, context) {
-    return new jQuery.fn.init(selector, context);
-    // $()都是创建这个类的实例
-}
-```
 ## 仿ECMAScript5中Object.create()函数
 ```js
         function inherit(obj) {
