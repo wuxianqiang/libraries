@@ -18,6 +18,7 @@
 - [表格的行排序](#表格的行排序)
 - [生成目录表](#生成目录表)
 - [从URL解析参数](#从url解析参数)
+- [获取纯文本的元素内容](#获取纯文本的元素内容)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
@@ -447,3 +448,28 @@ function urlArgs() {
 }
 ```
 **[⬆ back to top](#readme)**
+
+## 获取纯文本的元素内容
+
+```js
+/**
+ *一个参数，返回元素的textContent或innerText
+ *两个参数，用value参数的值设置元素的textContent或innerText
+ */
+function textContent(element, value) {
+    var content = element.textContent; //检测textContent是否有定义
+    if (value === undefined) { //没传递value，因此返回当前文本
+        if (content !== undefined) {
+            return content;
+        } else {
+            return element.innerText;
+        }
+    } else { //传递了value，因此设置文本
+        if (content !== undefined) {
+            element.textContent = value;
+        } else {
+            element.innerText = value;
+        }
+    }
+}
+```
