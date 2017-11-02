@@ -14,6 +14,43 @@
             return new Fn();
         }
 ```
+## 仿ECMAScript5中Array.reduce()函数
+
+```js
+        var reduce = Array.prototype.reduce ? function (ary, fn, initial) {
+            if (arguments.length > 2) { //如果reduce()方法存在的话
+                return ary.reduce(fn, initial); //如果传入了一个初始值
+            } else {
+                return ary.reduce(fn); //否则初始值
+            }
+        } : function (ary, fn, initial) { //以特定的初始值开始，否则第一个值取自ary
+            var i = 0,
+                len = ary.length,
+                accumulator;
+            if (arguments.length > 2) {
+                accumulator = initial;
+            } else { //找到数组中第一个已经定义的索引
+                if (len == 0) throw TypeError();
+                while (i < len) {
+                    if (i in ary) {
+                        accumulator = ary[i++];
+                        break;
+                    } else {
+                        i++;
+                    }
+                }
+                if (i == len) throw TypeError();
+            }
+            while (i < len) { //对于数组中剩下的元素依次调用fn
+                if (i in ary) {
+                    accumulator = fn.call(undefined, accumulator, ary[i], i, ary)
+                }
+                i++;
+            }
+            return accumulator;
+        }
+```
+
 ## 在数组中查找所有出现的元素方法
 
 ```js
