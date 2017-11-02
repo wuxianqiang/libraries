@@ -3,6 +3,15 @@
 # 目录
 - [仿ECMAScript5中Object.create()函数](#仿ecmascript5中objectcreate函数)
 - [仿ECMAScript5中Array.reduce()函数](#仿ecmascript5中arrayreduce函数)
+- [在数组中查找所有出现的元素方法](#在数组中查找所有出现的元素方法)
+- [数据类型检测，特殊情况特殊处理](#数据类型检测，特殊情况特殊处理)
+- [仿ECMAScript5中Object.keys()函数](#仿ecmascript5中objectkeys函数)
+- [仿Math.max方法（不定实参函数）](#仿mathmax方法不定实参函数)
+- [仿ECMAScript5中Function.bind()函数](#仿ecmascript5中functionbind函数)
+- [仿ECMAScript5中Array.map()函数](#仿ecmascript5中arraymap函数)
+- [数组去重](#数组去重)
+- [冒泡排序](#冒泡排序)
+- [仿String.match()方法实现](#仿stringmatch方法实现)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
