@@ -100,6 +100,22 @@ var jQuery = function (selector, context) {
         }
 ```
 
+## ECMAScript3版本中实现Array.map()方法
+
+```js
+        var map = Array.prototype.map ? function (ary, fn) {
+            return ary.map(fn);
+        } : function (ary, fn) {
+            var results = [];
+            for (var i = 0, len = ary.length; i < len; i++) {
+                if (i in ary) {
+                    results[i] = fn.call(null, ary[i], i, ary);
+                }
+            }
+            return results;
+        }
+```
+
 ## 代码
 
 ```js
