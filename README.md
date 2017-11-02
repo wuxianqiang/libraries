@@ -22,6 +22,7 @@
 - [手写一个JSONP实现](#手写一个jsonp实现)
 - [插入节点](#插入节点)
 - [使用innerHTML实现outerHTML属性](#使用innerhtml实现outerhtml属性)
+- [倒序排列子节点](#倒序排列子节点)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
@@ -503,7 +504,7 @@ function insertAt(parent, child, n) {
     }
 }
 ```
-
+**[⬆ back to top](#readme)**
 ## 使用innerHTML实现outerHTML属性
 ```js
 //为那些不支持它的浏览器实现outerHTML属性
@@ -540,3 +541,16 @@ function insertAt(parent, child, n) {
     }
 }());
 ```
+**[⬆ back to top](#readme)**
+## 倒序排列子节点
+```js
+//倒序排列节点n的子节点
+function reverse(n) { //创建一个DocumentFragment作为临时容器
+    var f = document.createDocumentFragment(); //从后至前循环子节点，将每一个子节点移动到文档片段中
+    //n的最后一个节点变成f的第一个节点，反之亦然
+    //注意，给f添加一个节点，该节点自动地会从n中删除
+    while (n.lastChild) f.appendChild(n.lastChild); //最后，把f的所有子节点一次性全部移回n中
+    n.appendChild(f);
+}
+```
+**[⬆ back to top](#readme)**
