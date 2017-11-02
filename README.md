@@ -19,6 +19,7 @@
 - [生成目录表](#生成目录表)
 - [从URL解析参数](#从url解析参数)
 - [获取纯文本的元素内容](#获取纯文本的元素内容)
+- [手写一个JSONP实现](#手写一个jsonp实现)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
@@ -473,3 +474,16 @@ function textContent(element, value) {
     }
 }
 ```
+**[⬆ back to top](#readme)**
+## 手写一个JSONP实现
+
+```js
+//从指定的URL，异步加载和执行脚本
+function loadasync(url) {
+    var head = document.getElementsByTagName("head")[0]; //查找文档的＜head＞标签
+    var s = document.createElement("script"); //创建一个＜script＞元素
+    s.src = url; //设置它的src属性值
+    head.appendChild(s); //将该＜script＞插入到head中
+}
+```
+**[⬆ back to top](#readme)**
