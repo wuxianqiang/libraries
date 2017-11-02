@@ -21,7 +21,7 @@
 - [获取纯文本的元素内容](#获取纯文本的元素内容)
 - [手写一个JSONP实现](#手写一个jsonp实现)
 - [插入节点](#插入节点)
-- [使用innerHTML实现outerHTML](使用innerhtml实现outerhtml)
+- [使用innerHTML实现outerHTML属性](使用innerhtml实现outerhtml属性)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
