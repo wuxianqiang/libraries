@@ -1,8 +1,8 @@
 # libraries
 
 # 目录
-- [仿ECMAScript5中Object.create()函数](#仿ecmascript5中objectcreate()函数)
-- [仿ECMAScript5中Array.reduce()函数](#仿ecmascript5中arrayreduce()函数)
+- [仿ECMAScript5中Object.create()函数](#仿ecmascript5中objectcreate函数)
+- [仿ECMAScript5中Array.reduce()函数](#仿ecmascript5中arrayreduce函数)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
