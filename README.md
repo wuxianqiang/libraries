@@ -24,6 +24,7 @@
 - [使用innerHTML实现outerHTML属性](#使用innerhtml实现outerhtml属性)
 - [倒序排列子节点](#倒序排列子节点)
 - [查询窗口滚动条的位置](#查询窗口滚动条的位置)
+- [查询窗口的视口尺寸](#查询窗口的视口尺寸)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
@@ -577,3 +578,24 @@ function getScrollOffsets(w) { //使用指定的窗口，如果不带参数则�
 }
 ```
 **[⬆ back to top](#readme)**
+## 查询窗口的视口尺寸
+```js
+//作为一个对象的w和h属性返回视口的尺寸
+function getViewportSize(w) { //使用指定的窗口，如果不带参数则使用当前窗口
+    w = w || window; //除了IE 8及更早的版本以外，其他浏览器都能用
+    if (w.innerWidth != null) return {
+        w: w.innerWidth,
+        h: w.innerHeight
+    }; //对标准模式下的IE（或任何浏览器）
+    var d = w.document;
+    if (document.compatMode == "CSS1Compat")
+        return {
+            w: d.documentElement.clientWidth,
+            h: d.documentElement.clientHeight
+        }; //对怪异模式下的浏览器
+    return {
+        w: d.body.clientWidth,
+        h: d.body.clientWidth
+    };
+}
+```
