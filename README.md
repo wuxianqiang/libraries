@@ -1,4 +1,6 @@
 # libraries
+# 目录
+
 
 ## jQuery源码解读
 
@@ -25,7 +27,7 @@ var jQuery = function (selector, context) {
             return new Fn();
         }
 ```
-## 在数组ary中查找所有出现的元素ele，并返回一个包含匹配索引的数组
+## 在数组中查找所有出现的元素方法
 
 ```js
         function findAll(ary, ele) {
@@ -42,7 +44,7 @@ var jQuery = function (selector, context) {
         }
 ```
 
-## 数据类型检测，特殊情况处理null和undefined
+## 数据类型检测，特殊情况处理特殊处理
 
 ```js
         function classOf(obj) {
@@ -116,11 +118,10 @@ var jQuery = function (selector, context) {
         }
 ```
 
-## 代码
+## 数组去重
 
 ```js
-        //数组去重
-        Array.prototype.unique = function unique() {
+        Array.prototype.unique = function unique() {
             var obj = {};
             for (var i = 0; i < this.length; i++) {
                 var current = this[i];
@@ -135,8 +136,12 @@ var jQuery = function (selector, context) {
             obj = null;
             return this;
         }
-        //冒泡排序
-        Array.prototype.bubbleSort = function bubbleSort() {
+```
+
+## 冒泡排序
+
+```js
+        Array.prototype.bubbleSort = function bubbleSort() {
             var temp = null;
             for (var i = 0; i < this.length - 1; i++) {
                 for (var k = 0; k < this.length - 1 - i; k++) {
@@ -149,7 +154,12 @@ var jQuery = function (selector, context) {
             }
             return this;
         }
-        //match方法
+
+```
+
+## 仿match方法
+
+```js
         String.prototype.mymatch = function (reg) {
          var ary = [];
          var res = reg.exec(this);
@@ -159,38 +169,5 @@ var jQuery = function (selector, context) {
          }
          return ary;
         }
-        //原型练习题
-        function Fn(num) {
-            this.x = this.y = num;
-        }
-        Fn.prototype = {
-            x: 20,
-            sum: function () {
-                console.log(this.x + this.y);
-            }
-        }
-
-        var f = new Fn(10);
-        console.log(f.sum === Fn.prototype.sum); // ture
-        f.sum(); //10+10=20
-        Fn.prototype.sum(); //20+undefined=NaN
-        console.log(f.constructor); //Object
-        // 初始化数组
-        var ary = [];
-        for(var i = 0; i < 6; ary[i++] = i); /* empty */
-        console.log(ary); // => [ 1, 2, 3, 4, 5, 6 ]
-        
-        //仿ECMAScript5定义的Object.keys()方法
-        function keys(obj) {
-            if (typeof obj !== "object") {
-                throw TypeError();
-            }
-            var result = [];
-            for (var prop in obj) {
-                if (obj.hasOwnProperty(prop)) {
-                    result.push(prop);
-                }
-            }
-            return result;
-        }
 ```
+
