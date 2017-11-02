@@ -212,3 +212,34 @@
             return ele;
         }
 ```
+
+## 返回元素的第n个兄弟元素
+
+```js
+/**
+ *返回元素ele的第n个兄弟元素
+ *如果n为正，返回后续的第n个兄弟元素
+ *如果n为负，返回前面的第n个兄弟元素
+ *如果n为零，返回ele本身
+ */
+function sibling(ele, n) {
+    while (ele && n !== 0) { //如果ele未定义，即刻返回它
+        if (n > 0) { //查找后续的兄弟元素
+            if (ele.nextElementSibling) {
+                ele = ele.nextElementSibling;
+            } else {
+                for (ele = ele.nextSibling; ele && ele.nodeType !== 1; ele = ele.nextSibling) /*空循环*/;
+            }
+            n--;
+        } else { //查找前面的兄弟元素
+            if (ele.previousElementSibing) {
+                ele = ele.previousElementSibling;
+            } else {
+                for (ele = ele.previousSibling; ele && ele.nodeType !== 1; ele = ele.previousSibling) /*空循环*/;
+            }
+            n++;
+        }
+    }
+    return ele;
+}
+```
