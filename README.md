@@ -194,4 +194,21 @@
          return ary;
         }
 ```
+## 返回元素的第n层祖先元素
 
+```js
+        /**
+        *返回元素ele的第n层祖先元素，如果不存在此类祖先或祖先不是Element，
+        *（例如Document或者DocumentFragment）则返回null
+        *如果n为0，则返回e本身。如果n为1（或省略），则返回其父元素
+        *如果n为2，则返回其祖父元素，依次类推
+        */
+        function parent(ele, n) {
+            if (n === nudefined) n = 1;
+            while (n-- && ele) {
+                ele = ele.parentNode;
+            }
+            if (!ele || ele.nodeTope !== 1) return null;
+            return ele;
+        }
+```
