@@ -23,6 +23,7 @@
 - [插入节点](#插入节点)
 - [使用innerHTML实现outerHTML属性](#使用innerhtml实现outerhtml属性)
 - [倒序排列子节点](#倒序排列子节点)
+- [查询窗口滚动条的位置](#查询窗口滚动条的位置)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
@@ -551,6 +552,28 @@ function reverse(n) { //创建一个DocumentFragment作为临时容器
     //注意，给f添加一个节点，该节点自动地会从n中删除
     while (n.lastChild) f.appendChild(n.lastChild); //最后，把f的所有子节点一次性全部移回n中
     n.appendChild(f);
+}
+```
+**[⬆ back to top](#readme)**
+## 查询窗口滚动条的位置
+```js
+//以一个对象的x和y属性的方式返回滚动条的偏移量
+function getScrollOffsets(w) { //使用指定的窗口，如果不带参数则使用当前窗口
+    w = w || window; //除了IE 8及更早的版本以外，其他浏览器都能用
+    if (w.pageXOffset != null) return {
+        x: w.pageXOffset,
+        y: w.pageYOffset
+    }; //对标准模式下的IE（或任何浏览器）
+    var d = w.document;
+    if (document.compatMode == "CSS1Compat")
+        return {
+            x: d.documentElement.scrollLeft,
+            y: d.documentElement.scrollTop
+        }; //对怪异模式下的浏览器
+    return {
+        x: d.body.scrollLeft,
+        y: d.body.scrollTop
+    };
 }
 ```
 **[⬆ back to top](#readme)**
