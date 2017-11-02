@@ -42,7 +42,7 @@ var jQuery = function (selector, context) {
         }
 ```
 
-## 获取对象obj的类，并且这个函数包含了对null和undefined的特殊处理，（在ECMAScript5中不要对这些情况做处理）
+## 数据类型检测，特殊情况处理null和undefined
 
 ```js
         function classOf(obj) {
