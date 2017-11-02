@@ -15,20 +15,14 @@ var jQuery = function (selector, context) {
 ```
 ## 仿ECMAScript5中Object.create()函数
 ```js
-        function inherit(p) {
-            if (p === null) {
-                throw TypeError()
-            }
-            if (Object.create) {
-                return Object.create(p)
-            }
-            var t = typeof p;
-            if (t !== "object" && t !== "function") {
-                throw TypeError()
-            }
+        function inherit(obj) {
+            if (obj === null) throw TypeError();
+            if (Object.create) return Object.create(obj);
+            var t = typeof obj;
+            if (t !== "object" && t !== "function") throw TypeError();
             function Fn() {};
             Fn.prototype = p;
-            return new Fn()
+            return new Fn();
         }
 ```
 ## 在数组ary中查找所有出现的元素ele，并返回一个包含匹配索引的数组
