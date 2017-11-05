@@ -2,6 +2,7 @@
 
 # 目录
 - [仿ECMAScript5中Object.create()函数](#仿ecmascript5中objectcreate函数)
+- [仿ECMAScript5中String.trim()函数](#仿ecmascript5中stringtrim函数)
 - [仿ECMAScript5中Array.reduce()函数](#仿ecmascript5中arrayreduce函数)
 - [在数组中查找所有出现的元素方法](#在数组中查找所有出现的元素方法)
 - [数据类型检测，特殊情况特殊处理](#数据类型检测，特殊情况特殊处理)
@@ -38,6 +39,17 @@
             return new Fn();
         }
 ```
+
+## 仿ECMAScript5中String.trim()函数
+```js
+        String.prototype.mytrim = function () {
+            String.prototype.trim || function () {
+                if (!this) return this; //空字符串不做处理
+                return this.replace(/^\s+|\s+$/g, "") //使用正则表达式经行空格替换
+            }
+        }
+```
+
 ## 仿ECMAScript5中Array.reduce()函数
 
 ```js
