@@ -35,7 +35,7 @@
             var t = typeof obj;
             if (t !== "object" && t !== "function") throw TypeError();
             function Fn() {};
-            Fn.prototype = p;
+            Fn.prototype = obj;
             return new Fn();
         }
 ```
