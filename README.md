@@ -26,6 +26,7 @@
 - [倒序排列子节点](#倒序排列子节点)
 - [查询窗口滚动条的位置](#查询窗口滚动条的位置)
 - [查询窗口的视口尺寸](#查询窗口的视口尺寸)
+- [返回函数的名字](#返回函数的名字)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
@@ -611,3 +612,11 @@ function getViewportSize(w) { //使用指定的窗口，如果不带参数则使
     };
 }
 ```
+**[⬆ back to top](#readme)**
+## 返回函数的名字
+```js
+Function.prototype.getName = function () {
+    return this.name || this.toString().match(/function\s*(\w*)\s*\(/)[1];
+}
+```
+**[⬆ back to top](#readme)**
