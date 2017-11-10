@@ -32,6 +32,7 @@
 - [手写一个JSONP实现](#手写一个jsonp实现)
 - [查询纯文本形式的内容](#查询纯文本形式的内容)
 - [查找元素的后代中节点中的所有Text节点](#查找元素的后代中节点中的所有text节点)
+- [使用innerHTML实现insertAdjacentHTML](#使用innerhtml实现insertadjacenthtml)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
@@ -781,3 +782,70 @@ function textContent(e) {
     return s;
 }
 ```
+**[⬆ back to top](#readme)**
+## 使用innerHTML实现insertAdjacentHTML()
+```js
+//本模块为不支持它的浏览器定义了Element.insertAdjacentHTML
+//还定义了一些可移植的HTML插入函数，它们的名字比insertAdjacentHTML更符合逻辑：
+//Insert.before()、Insert.after()、Insert.atStart()和Insert.atEnd()
+var Insert = (function () { //如果元素有原生的insertAdjacentHTML，
+    //在4个函数名更明了的HTML插入函数中使用它
+    if (document.createElement("div").insertAdjacentHTML) {
+        return {
+            before: function (e, h) {
+                e.insertAdjacentHTML("beforebegin", h);
+            },
+            after: function (e, h) {
+                e.insertAdjacentHTML("afterend", h);
+            },
+            atStart: function (e, h) {
+                e.insertAdjacentHTML("afterbegin", h);
+            },
+            atEnd: function (e, h) {
+                e.insertAdjacentHTML("beforeend", h);
+            }
+        };
+    }
+    //否则，无原生的insertAdjacentHTML
+    //实现同样的4个插入函数，并使用它们来定义insertAdjacentHTML
+    //首先，定义一个工具函数，传入HTML字符串，返回一个DocumentFragment，
+    //它包含了解析后的HTML的表示
+    function fragment(html) {
+        var elt = document.createElement("div"); //创建空元素
+        var frag = document.createDocumentFragment(); //创建空文档片段
+        elt.innerHTML = html; //设置元素内容
+        while (elt.firstChild) //移动所有的节点
+            frag.appendChild(elt.firstChild); //从elt到frag
+        return frag; //然后返回frag
+    }
+    var Insert = {
+        before: function (elt, html) {
+            elt.parentNode.insertBefore(fragment(html), elt);
+        },
+        after: function (elt, html) {
+            elt.parentNode.insertBefore(fragment(html), elt.nextSibling);
+        },
+        atStart: function (elt, html) {
+            elt.insertBefore(fragment(html), elt.firstChild);
+        },
+        atEnd: function (elt, html) {
+            elt.appendChild(fragment(html));
+        }
+    }; //基于以上函数实现insertAdjacentHTML
+    Element.prototype.insertAdjacentHTML = function (pos, html) {
+        switch (pos.toLowerCase()) {
+            case "beforebegin":
+                return Insert.before(this, html);
+            case "afterend":
+                return Insert.after(this, html);
+            case "afterbegin":
+                return Insert.atStart(this, html);
+            case "beforeend":
+                return Insert.atEnd(this, html);
+        }
+    };
+    return Insert; //最后返回4个插入函数
+}());
+```
+
+**[⬆ back to top](#readme)**
