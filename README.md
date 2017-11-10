@@ -31,6 +31,7 @@
 - [获取纯文本的元素内容](#获取纯文本的元素内容)
 - [手写一个JSONP实现](#手写一个jsonp实现)
 - [查询纯文本形式的内容](#查询纯文本形式的内容)
+- [查找元素的后代中节点中的所有Text节点](#查找元素的后代中节点中的所有text节点)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
@@ -763,3 +764,20 @@ function textContent(element, value) {
 }
 ```
 textContent属性在除了IE的所有当前的浏览器中都支持。在IE中，可以用Element的innerText属性来代替。
+**[⬆ back to top](#readme)**
+## 查找元素的后代中节点中的所有Text节点
+```js
+//返回元素e的纯文本内容，递归进入其子元素
+//该方法的效果类似于textContent属性
+function textContent(e) {
+    var child, type, s = ""; //s保存所有子节点的文本
+    for (child = e.firstChild; child != null; child = child.nextSibling) {
+        type = child.nodeType;
+        if (type === 3 || type === 4) //Text和CDATASection节点
+            s += child.nodeValue;
+        else if (type === 1) //递归Element节点
+            s += textContent(child);
+    }
+    return s;
+}
+```
