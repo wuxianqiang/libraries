@@ -30,6 +30,7 @@
 - [从URL解析参数](#从url解析参数)
 - [获取纯文本的元素内容](#获取纯文本的元素内容)
 - [手写一个JSONP实现](#手写一个jsonp实现)
+- [查询纯文本形式的内容](#查询纯文本形式的内容)
 
 ## 仿ECMAScript5中Object.create()函数
 ```js
@@ -744,3 +745,21 @@ CSSClassList.prototype.toArray = function () {
 };
 ```
 **[⬆ back to top](#readme)**
+## 查询纯文本形式的内容
+```js
+/**
+ *一个参数，返回元素的textContent或innerText
+ *两个参数，用value参数的值设置元素的textContent或innerText
+ */
+function textContent(element, value) {
+    var content = element.textContent; //检测textContent是否有定义
+    if (value === undefined) { //没传递value，因此返回当前文本
+        if (content !== undefined) return content;
+        else return element.innerText;
+    } else { //传递了value，因此设置文本
+        if (content !== undefined) element.textContent = value;
+        else element.innerText = value;
+    }
+}
+```
+textContent属性在除了IE的所有当前的浏览器中都支持。在IE中，可以用Element的innerText属性来代替。
