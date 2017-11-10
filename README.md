@@ -33,7 +33,7 @@
 - [查询纯文本形式的内容](#查询纯文本形式的内容)
 - [查找元素的后代中节点中的所有Text节点](#查找元素的后代中节点中的所有text节点)
 - [使用innerHTML实现insertAdjacentHTML](#使用innerhtml实现insertadjacenthtml)
-
+- [拖拽](#拖拽)
 ## 仿ECMAScript5中Object.create()函数
 ```js
         function inherit(obj) {
@@ -848,4 +848,90 @@ var Insert = (function () { //如果元素有原生的insertAdjacentHTML，
 }());
 ```
 
+**[⬆ back to top](#readme)**
+## 拖拽
+```js
+/**
+ *Drag.js：拖动绝对定位的HTML元素
+ *
+ *这个模块定义了一个drag()函数，它用于mousedown事件处理程序的调用
+ *随后的mousemove事件将移动指定元素，mouseup事件将终止拖动
+ *这些实现能同标准和IE两种事件模型一起工作
+ *
+ *参数：
+ *
+ *elementToDrag：接收mousedown事件的元素或某些包含元素
+ *它必须是定位的元素,元素的样式必须是行内样式
+ *它的style.left和style.top值将随着用户的拖动而改变
+ *
+ *event：mousedown事件对象
+ **/
+function drag(elementToDrag, event) { //初始鼠标位置，转换为文档坐标
+    var startX = event.clientX;
+    var startY = event.clientY; //在文档坐标下，待拖动元素的初始位置
+    //因为elementToDrag是绝对定位的，
+    //所以我们可以假设它的offsetParent就是文档的body元素
+    var origX = parseFloat(elementToDrag.style.left);
+    var origY = parseFloat(elementToDrag.style.top); //计算mousedown事件和元素左上角之间的距离
+    //我们将它另存为鼠标移动的距离
+    if (document.addEventListener) { //标准事件模型
+        //在document对象上注册捕获事件处理程序
+        document.addEventListener("mousemove", moveHandler, true);
+        document.addEventListener("mouseup", upHandler, true);
+    } else if (document.attachEvent) { //用于IE5～8的IE事件模型
+        //在IE事件模型中，
+        //捕获事件是通过调用元素上的setCapture()捕获它们
+        elementToDrag.setCapture();
+        elementToDrag.attachEvent("onmousemove", moveHandler);
+        elementToDrag.attachEvent("onmouseup", upHandler); //作为mouseup事件看待鼠标捕获的丢失
+        elementToDrag.attachEvent("onlosecapture", upHandler);
+    }
+    //我们处理了这个事件，不让任何其他元素看到它
+    if (event.stopPropagation) event.stopPropagation(); //标准模型
+    else event.cancelBubble = true; //IE
+    //现在阻止任何默认操作
+    if (event.preventDefault) event.preventDefault(); //标准模型
+    else event.returnValue = false; //IE
+    /**
+     * 当元素正在被拖动时， 这就是捕获mousemove事件的处理程序
+     *它用于移动这个元素 
+     **/
+    function moveHandler(e) {
+        if (!e) e = window.event; //IE事件模型
+        //移动这个元素到当前鼠标位置，
+        //通过滚动条的位置和初始单击的偏移量来调整
+        var targetLeft = e.clientX - startX + origX;
+        var targetTop = e.clientY - startY + origY;
+        var minLeft = 0;
+        var minTop = 0;
+        var maxLeft = (document.documentElement.clientWidth || document.body.clientWidth) - elementToDrag.offsetWidth;
+        var maxTop = (document.documentElement.clientHeight || document.body.clientHeight) - elementToDrag.offsetHeight;
+        targetLeft = targetLeft > maxLeft ? maxLeft : (targetLeft < minLeft ? minLeft : targetLeft);
+        targetTop = targetTop > maxTop ? maxTop : (targetTop < minTop ? minTop : targetTop);
+        elementToDrag.style.left = targetLeft + "px";
+        elementToDrag.style.top = targetTop + "px";
+        if (e.stopPropagation) e.stopPropagation(); //标准
+        else e.cancelBubble = true; //IE
+    }
+    /**
+     *这是捕获在拖动结束时发生的最终mouseup事件的处理程序
+     **/
+    function upHandler(e) {
+        if (!e) e = window.event; //IE事件模型
+        //注销捕获事件处理程序
+        if (document.removeEventListener) { //DOM事件模型
+            document.removeEventListener("mouseup", upHandler, true);
+            document.removeEventListener("mousemove", moveHandler, true);
+        } else if (document.detachEvent) { //IE 5+事件模型
+            elementToDrag.detachEvent("onlosecapture", upHandler);
+            elementToDrag.detachEvent("onmouseup", upHandler);
+            elementToDrag.detachEvent("onmousemove", moveHandler);
+            elementToDrag.releaseCapture();
+        }
+        //并且不让事件进一步传播
+        if (e.stopPropagation) e.stopPropagation(); //标准模型
+        else e.cancelBubble = true; //IE
+    }
+}
+```
 **[⬆ back to top](#readme)**
