@@ -34,7 +34,8 @@
 - [查找元素的后代中节点中的所有Text节点](#查找元素的后代中节点中的所有text节点)
 - [使用innerHTML实现insertAdjacentHTML](#使用innerhtml实现insertadjacenthtml)
 - [拖拽](#拖拽)
-- [通过获取地理位置信息在谷歌地图上显示](#通过获取地理位置信息在谷歌地图上显示)
+- [在谷歌地图上显示地理位置信息](#在谷歌地图上显示地理位置信息)
+- [使用所有地理位置特性](#使用所有地理位置特性)
 ## 仿ECMAScript5中Object.create()函数
 ```js
         function inherit(obj) {
@@ -956,7 +957,7 @@ function drag(elementToDrag, event) { //初始鼠标位置，转换为文档坐�
 }
 ```
 **[⬆ back to top](#readme)**
-## 通过获取地理位置信息在谷歌地图上显示
+## 在谷歌地图上显示地理位置信息
 ```js
 //获取当前位置然后通过Google地图显示
 //如果当前浏览器不支持地理位置API，则抛出一个错误
@@ -975,3 +976,51 @@ function getmap() { //检查是否支持地理位置API
 }
 ```
 **[⬆ back to top](#readme)**
+## 使用所有地理位置特性
+```js
+//异步的获取我的位置，并在指定的元素中展示出来
+function whereami(elt) { //将此对象作为第三个参数传递给getCurrentPosition()方法
+    var options = { //设置为true，表示如果可以的话
+        //获取高精度的位置信息（例如，通过GPS获取）
+        //但是，要注意的是，这会影响电池寿命
+        enableHighAccuracy: false, //可以近似：这是默认值
+        //如果获取缓存过的位置信息就足够的话，可以设置此属性
+        //默认值为0,表示强制检查新的位置信息
+        maximumAge: 300000, //5分钟左后
+        //愿意等待多长时间来获取位置信息？
+        //默认值为无限长 [2] ，getCurrentPosition()方法永不超时
+        timeout: 15000 //不要超过15秒
+    };
+    if (navigator.geolocation) //如果支持的话，就获取位置信息
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    else
+        elt.innerHTMl = "Geolocation not supported in this browser"; //当获取位置信息失败的时候，会调用此函数
+
+    function error(e) { //error对象包含一些数字编码和文本消息，如下所示：
+        //1:用户不允许分享他/她的位置信息
+        //2:浏览器无法确定位置
+        //3:发生超时
+        elt.innerHTML = "Geolocation error" + e.code + ":" + e.message;
+    }
+    //当获取位置信息成功的时候，会调用此函数
+    function success(pos) { //总是可以获取如下这些字段
+        //但是要注意的是时间戳信息在outer对象中，而不在inner、coords对象中
+        var msg = "时间是" +
+            new Date(pos.timestamp).toLocaleString() + "地理位置是" +
+            pos.coords.accuracy + "米范围内经度是" +
+            pos.coords.latitude + "纬度是" +
+            pos.coords.longitude + "."; //如果设备还返回了海拔信息，则将其添加进去
+        if (pos.coords.altitude) {
+            msg += "海拔是" + pos.coords.altitude + "±" +
+                pos.coords.altitudeAccuracy + "千米.";
+        }
+        //如果设备还返回了速度和航向信息，也将它们添加进去
+        if (pos.coords.speed) {
+            msg += "速度是" +
+                pos.coords.speed + "m/s方向是" +
+                pos.coords.heading + ".";
+        }
+        elt.innerHTML = msg; //显示所有的位置信息
+    }
+}
+```
