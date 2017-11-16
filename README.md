@@ -34,6 +34,7 @@
 - [查找元素的后代中节点中的所有Text节点](#查找元素的后代中节点中的所有text节点)
 - [使用innerHTML实现insertAdjacentHTML](#使用innerhtml实现insertadjacenthtml)
 - [拖拽](#拖拽)
+- [通过获取地理位置信息在谷歌地图上显示](#通过获取地理位置信息在谷歌地图上显示)
 ## 仿ECMAScript5中Object.create()函数
 ```js
         function inherit(obj) {
@@ -951,6 +952,25 @@ function drag(elementToDrag, event) { //初始鼠标位置，转换为文档坐�
         //并且不让事件进一步传播
         if (e.stopPropagation) e.stopPropagation(); //标准模型
         else e.cancelBubble = true; //IE
+    }
+}
+```
+**[⬆ back to top](#readme)**
+## 通过获取地理位置信息在谷歌地图上显示
+```js
+//获取当前位置然后通过Google地图显示
+//如果当前浏览器不支持地理位置API，则抛出一个错误
+function getmap() { //检查是否支持地理位置API
+    if (!navigator.geolocation) throw "Geolocation not supported"; //开始请求地理位置信息，
+    navigator.geolocation.getCurrentPosition(setMapURL);
+    function setMapURL(pos) { //从参数对象（pos）中获取位置信息
+        var latitude = pos.coords.latitude; //经度
+        var longitude = pos.coords.longitude; //纬度
+        var accuracy = pos.coords.accuracy; //米
+        var scale = 10; //比例
+        //构造一个URL，用于跳转到Google地图
+        var url = "https://www.google.com/maps/@" + latitude + "," + longitude + "," + scale + "z"; //设置一个大致的缩放级别
+        location = url;
     }
 }
 ```
