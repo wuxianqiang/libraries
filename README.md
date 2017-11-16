@@ -36,6 +36,7 @@
 - [拖拽](#拖拽)
 - [在谷歌地图上显示地理位置信息](#在谷歌地图上显示地理位置信息)
 - [使用所有地理位置特性](#使用所有地理位置特性)
+- [优雅的图片翻转实现](#优雅的图片翻转实现)
 ## 仿ECMAScript5中Object.create()函数
 ```js
         function inherit(obj) {
@@ -1024,3 +1025,35 @@ function whereami(elt) { //将此对象作为第三个参数传递给getCurrentP
     }
 }
 ```
+**[⬆ back to top](#readme)**
+## 优雅的图片翻转实现
+```js
+/**
+ *优雅的图片翻转实现方式
+ *
+ *要创建图片翻转效果，将此模块引入到HTML文件中
+ *然后在任意＜img＞元素上使用data-rollover属性来指定翻转图片的URL即可
+ *如下所示:
+ *
+ *<img src="normal_image.png "data-rollover="rollover_image.png">
+ *
+ */
+function changeImage() { //所有处理逻辑都在一个匿名函数中:不定义任何符号
+    //遍历所有的图片，查找data-rollover属性
+    for (var i = 0; i < document.images.length; i++) {
+        var img = document.images[i];
+        var rollover = img.getAttribute("data-rollover");
+        if (!rollover) continue; //跳过没有data-rollover属性的图片
+        //确保将翻转的图片缓存起来
+        (new Image()).src = rollover; //定义一个属性来标识默认的图片URL
+        img.setAttribute("data-rollout", img.src); //注册事件处理函数来创建翻转效果
+        img.onmouseover = function () {
+            this.src = this.getAttribute("data-rollover");
+        };
+        img.onmouseout = function () {
+            this.src = this.getAttribute("data-rollout");
+        };
+    }
+}
+```
+**[⬆ back to top](#readme)**
