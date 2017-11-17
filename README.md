@@ -38,6 +38,7 @@
 - [使用所有地理位置特性](#使用所有地理位置特性)
 - [优雅的图片翻转实现](#优雅的图片翻转实现)
 - [使用canvas绘制多边形](#使用canvas绘制多边形)
+- [使用canvas绘制雪花](#使用canvas绘制雪花)
 ## 仿ECMAScript5中Object.create()函数
 ```js
         function inherit(obj) {
@@ -1076,6 +1077,45 @@ function polygon(c, n, x, y, r, angle, counterclockwise) {
             y - r * Math.cos(angle));
     }
     c.closePath(); //将最后一个顶点和起点连接起来
+}
+```
+**[⬆ back to top](#readme)**
+## 使用canvas绘制雪花
+```js
+var deg = Math.PI / 180; //用于角度制到弧度制的转换
+//在画布的上下文c中，以左下角的点(x,y)和边长len，绘制一个n级别的科赫雪花分形
+function snowflake(c, n, x, y, len) {
+    c.save(); //保存当前变换
+    c.translate(x, y); //变换原点为起始点
+    c.moveTo(0, 0); //从新的原点开始一条新的子路径
+    leg(n); //绘制雪花的第一条边
+    c.rotate(-120 * deg); //现在沿着逆时针方向旋转120 o
+    leg(n); //绘制第二条边
+    c.rotate(-120 * deg); //再次旋转
+    leg(n); //画最后一条边
+    c.closePath(); //闭合子路径
+    c.restore(); //恢复初始的变换
+    //绘制n级别的科赫雪花的一条边
+    //此函数在画完一条边的时候就离开当前点，
+    //然后通过坐标系变换将当前点又转换成(0,0,)
+    //这意味着画完一条边之后可以很简单地调用rotate()进行旋转
+    function leg(n) {
+        c.save(); //保存当前坐标系变换
+        if (n == 0) { //不需要递归的情况下:
+            c.lineTo(len, 0); //就绘制一条水平线段
+        } else { //递归情况下：绘制4条子边，类似这个样子： - \/ -
+            c.scale(1 / 3, 1 / 3); //子边长度为原边长的1/3
+            leg(n - 1); //递归第一条子边
+            c.rotate(60 * deg); //顺时针旋转60 o
+            leg(n - 1); //第二条子边
+            c.rotate(-120 * deg); //逆时针旋转120 o
+            leg(n - 1); //第三条子边
+            c.rotate(60 * deg); //通过旋转回到初始状态
+            leg(n - 1); //最后一条边
+        }
+        c.restore(); //恢复坐标系变换
+        c.translate(len, 0); //但是通过转换使得边的结束点为(0,0)
+    }
 }
 ```
 **[⬆ back to top](#readme)**
