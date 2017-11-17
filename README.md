@@ -39,7 +39,7 @@
 - [优雅的图片翻转实现](#优雅的图片翻转实现)
 - [使用canvas绘制多边形](#使用canvas绘制多边形)
 - [使用canvas绘制雪花](#使用canvas绘制雪花)
-- [在Web Worker中发起同步XMLHtttpRequest](#在webworker中发起同步xmlhtttprequest)
+- [在Web Worker中发起同步XMLHtttpRequest](#在web-worker中发起同步xmlhtttprequest)
 ## 仿ECMAScript5中Object.create()函数
 ```js
         function inherit(obj) {
