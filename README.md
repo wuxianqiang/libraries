@@ -105,7 +105,7 @@
 ```js
         function findAll(ary, ele) {
             var results = [],
-                len = a.length,
+                len = ary.length,
                 pos = 0;
             while (pos < len) {
                 pos = ary.indexOf(ele, pos);
