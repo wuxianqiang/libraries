@@ -40,6 +40,7 @@
 - [使用canvas绘制多边形](#使用canvas绘制多边形)
 - [使用canvas绘制雪花](#使用canvas绘制雪花)
 - [在Web Worker中发起同步XMLHtttpRequest](#在web-worker中发起同步xmlhtttprequest)
+- [统计字符串中每个字母的出现次数](#统计字符串中每个字母的出现次数)
 ## 仿ECMAScript5中Object.create()函数
 ```js
         function inherit(obj) {
@@ -1140,5 +1141,18 @@ onmessage = function (e) {
     }
     //最后，将这些URL内容以数组的形式传递回主线程
     postMessage(contents);
+}
+```
+**[⬆ back to top](#readme)**
+## 统计字符串中每个字母的出现次数
+```js
+function statistics(str) {
+        str = str || ""; //处理在不传递参数的情况下不报错
+        var obj = {};
+        for (var i = 0; i < str.length; i++) {
+                var element = str[i];
+                obj[element] = !obj[element] ? 1 : obj[element] + 1;
+        }
+        return obj;
 }
 ```
