@@ -1,6 +1,8 @@
 # libraries
 
 # 目录
+- [仿数组原型上的push()方法](#仿数组原型上的push()方法)
+- [仿ES6中的Array.of()方法](#仿es6中的array.of()方法)
 - [仿ECMAScript5中Object.create()函数](#仿ecmascript5中objectcreate函数)
 - [仿ECMAScript5中String.trim()函数](#仿ecmascript5中stringtrim函数)
 - [仿ECMAScript5中Array.reduce()函数](#仿ecmascript5中arrayreduce函数)
@@ -41,6 +43,35 @@
 - [使用canvas绘制雪花](#使用canvas绘制雪花)
 - [在Web Worker中发起同步XMLHtttpRequest](#在web-worker中发起同步xmlhtttprequest)
 - [统计字符串中每个字母的出现次数](#统计字符串中每个字母的出现次数)
+
+## 仿数组原型上的push()方法
+```js
+Array.prototype.myPush = function () {
+    let argLen = arguments.length;
+    if (argLen === 0) return this.length;
+    for (let i = 0; i < argLen; i++) {
+        const element = arguments[i];
+        this[this.length] = element;
+    }
+    return this.length;
+}
+```
+
+## 仿ES6中的Array.of()方法
+```js
+let myArray = { of: function of () {
+        const len = arguments.length;
+        if (len === 0) return [];
+        let ary = [];
+        for (let i = 0; i < len; i++) {
+            const element = arguments[i];
+            ary.push(element);
+        }
+        return ary;
+    }
+}
+```
+
 ## 仿ECMAScript5中Object.create()函数
 ```js
         function inherit(obj) {
