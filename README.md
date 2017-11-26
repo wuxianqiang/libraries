@@ -2,7 +2,7 @@
 
 # 目录
 - [仿数组原型上的push()方法](#仿数组原型上的push()方法)
-- [仿ES6中的Array.of()方法](#仿es6中的array.of()方法)
+- [仿ES6中的Array.of()方法](#仿es6中的arrayof()方法)
 - [仿ECMAScript5中Object.create()函数](#仿ecmascript5中objectcreate函数)
 - [仿ECMAScript5中String.trim()函数](#仿ecmascript5中stringtrim函数)
 - [仿ECMAScript5中Array.reduce()函数](#仿ecmascript5中arrayreduce函数)
