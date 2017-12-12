@@ -1,6 +1,7 @@
 # libraries
 
 # 目录
+- [仿函数原型上的call()方法](#仿函数原型上的call方法)
 - [仿数组原型上的push()方法](#仿数组原型上的push方法)
 - [仿ES6中的Array.of()方法](#仿es6中的arrayof方法)
 - [仿ECMAScript5中Object.create()函数](#仿ecmascript5中objectcreate函数)
@@ -44,6 +45,22 @@
 - [在Web Worker中发起同步XMLHtttpRequest](#在web-worker中发起同步xmlhtttprequest)
 - [统计字符串中每个字母的出现次数](#统计字符串中每个字母的出现次数)
 
+## 仿函数原型上的call()方法
+```js
+Function.prototype.mycall = function mycall() {
+    var ary = [...arguments].slice(1);
+    if (arguments[0] == undefined) {
+        this(...ary);
+    } else {
+        var obj = Object(arguments[0]);
+        obj.__proto__.fn = this;
+        obj.fn(...ary);
+        delete obj.__proto__.fn;
+    }
+    return this;
+}
+```
+**[⬆ back to top](#readme)**
 ## 仿数组原型上的push()方法
 ```js
 Array.prototype.myPush = function () {
@@ -56,7 +73,8 @@ Array.prototype.myPush = function () {
     return this.length;
 }
 ```
-
+**[⬆ back to top](#readme)**
+**[⬆ back to top](#readme)**
 ## 仿ES6中的Array.of()方法
 ```js
 let myArray = { of: function of () {
@@ -71,7 +89,7 @@ let myArray = { of: function of () {
     }
 }
 ```
-
+**[⬆ back to top](#readme)**
 ## 仿ECMAScript5中Object.create()函数
 ```js
         function inherit(obj) {
@@ -84,7 +102,7 @@ let myArray = { of: function of () {
             return new Fn();
         }
 ```
-
+**[⬆ back to top](#readme)**
 ## 仿ECMAScript5中String.trim()函数
 ```js
         String.prototype.mytrim = function () {
@@ -94,7 +112,7 @@ let myArray = { of: function of () {
             }
         }
 ```
-
+**[⬆ back to top](#readme)**
 ## 仿ECMAScript5中Array.reduce()函数
 
 ```js
