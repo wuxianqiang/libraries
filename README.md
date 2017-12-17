@@ -228,17 +228,18 @@ let myArray = { of: function of () {
 ## 仿ECMAScript5中Array.map()函数
 
 ```js
-        var map = Array.prototype.map ? function (ary, fn) {
-            return ary.map(fn);
-        } : function (ary, fn) {
-            var results = [];
-            for (var i = 0, len = ary.length; i < len; i++) {
-                if (i in ary) {
-                    results[i] = fn.call(null, ary[i], i, ary);
-                }
-            }
-            return results;
+Array.prototype.mymap = function (fn, obj) {
+    let res = [];
+    for (let i = 0; i < this.length; i++) {
+        const element = this[i];
+        if (obj == undefined) {
+            res[i] = fn(element, i, this)
+        } else {
+            res[i] = fn.call(obj, element, i, this);
         }
+    }
+    return res;
+}
 ```
 **[⬆ back to top](#readme)**
 ## 仿ECMAScript5中Array.forEach()函数
