@@ -11,6 +11,11 @@
 - [仿ECMAScript5中Function.bind()函数](#仿ecmascript5中functionbind函数)
 - [仿ECMAScript5中Array.map()函数](#仿ecmascript5中arraymap函数)
 - [仿ECMAScript5中Array.forEach()函数](#仿ecmascript5中arrayforeach函数)
+- [仿ECMAScript5中Array.filter()函数](#仿ecmascript5中arrayfilter函数)
+- [仿ECMAScript5中Array.every()函数](#仿ecmascript5中arrayevery函数)
+- [仿ECMAScript5中Array.some()函数](#仿ecmascript5中arraysome函数)
+- [仿ECMAScript5中Array.find()函数](#仿ecmascript5中arrayfind函数)
+- [仿ECMAScript5中Array.findIndex()函数](#仿ecmascript5中arrayfindindex函数)
 - [仿Math.max()方法实现](#仿mathmax方法不定实参函数)
 - [仿String.match()方法实现](#仿stringmatch方法实现)
 - [仿HTML5的classList属性实现](#仿html5的classlist属性)
@@ -253,6 +258,121 @@ Array.prototype.myforEach = function (fn, obj) {
             fn.call(obj, element, i, this);
         }
     }
+}
+```
+**[⬆ back to top](#readme)**
+## 仿ECMAScript5中Array.filter()函数
+```js
+Array.prototype.myfilter = function (fn, obj) {
+    let res = [],
+        index = 0;
+    for (let i = 0; i < this.length; i++) {
+        const element = this[i];
+        if (obj == undefined) {
+            let cur = fn(element, i, this);
+            if (cur) res[index++] = element;
+        } else {
+            let cur = fn.call(obj, element, i, this);
+            if (cur) res[index++] = element;
+        }
+    }
+    return res;
+}
+```
+**[⬆ back to top](#readme)**
+## 仿ECMAScript5中Array.every()函数
+```js
+Array.prototype.myevery = function (fn, obj) {
+    let res = true;
+    for (let i = 0; i < this.length; i++) {
+        const element = this[i];
+        if (obj == undefined) {
+            let cur = fn(element, i, this);
+            if (!cur) {
+                res = false;
+                break;
+            }
+        } else {
+            let cur = fn.call(obj, element, i, this);
+            if (!cur) {
+                res = false;
+                break;
+            }
+        }
+    }
+    return res;
+}
+```
+**[⬆ back to top](#readme)**
+## 仿ECMAScript5中Array.some()函数
+```js
+Array.prototype.mysome = function (fn, obj) {
+    let res = false;
+    for (let i = 0; i < this.length; i++) {
+        const element = this[i];
+        if (obj == undefined) {
+            let cur = fn(element, i, this);
+            if (cur) {
+                res = true;
+                break;
+            }
+        } else {
+            let cur = fn.call(obj, element, i, this);
+            if (cur) {
+                res = true;
+                break;
+            }
+        }
+    }
+    return res;
+}
+```
+**[⬆ back to top](#readme)**
+## 仿ECMAScript5中Array.find()函数
+```js
+Array.prototype.myfind = function (fn, obj) {
+    let res = null;
+    for (let i = 0; i < this.length; i++) {
+        const element = this[i];
+        if (obj == undefined) {
+            let cur = fn(element, i, this);
+            if (cur) {
+                res = element;
+                break;
+            }
+        } else {
+            let cur = fn.call(obj, element, i, this);
+            if (cur) {
+                res = element;
+                break;
+            }
+        }
+    }
+    return res;
+}
+```
+**[⬆ back to top](#readme)**
+## 仿ECMAScript5中Array.findIndex()函数
+```js
+Array.prototype.myfindIndex = function (fn, obj) {
+    let res = null;
+    for (let i = 0; i < this.length; i++) {
+        const element = this[i];
+        if (obj == undefined) {
+            let cur = fn(element, i, this);
+            if (cur) {
+                res = i;
+                break;
+            }
+        } else {
+            let cur = fn.call(obj, element, i, this);
+            if (cur) {
+                res = i;
+                break;
+            }
+        }
+    }
+    return res;
 }
 ```
 **[⬆ back to top](#readme)**
