@@ -10,6 +10,7 @@
 - [仿ECMAScript5中Object.keys()函数](#仿ecmascript5中objectkeys函数)
 - [仿ECMAScript5中Function.bind()函数](#仿ecmascript5中functionbind函数)
 - [仿ECMAScript5中Array.map()函数](#仿ecmascript5中arraymap函数)
+- [仿ECMAScript5中Array.forEach()函数](仿ecmascript5中arrayforeach函数)
 - [仿Math.max()方法实现](#仿mathmax方法不定实参函数)
 - [仿String.match()方法实现](#仿stringmatch方法实现)
 - [仿HTML5的classList属性实现](#仿html5的classlist属性)
@@ -238,6 +239,20 @@ let myArray = { of: function of () {
             }
             return results;
         }
+```
+**[⬆ back to top](#readme)**
+## 仿ECMAScript5中Array.forEach()函数
+```js
+Array.prototype.myforEach = function (fn, obj) {
+    for (let i = 0; i < this.length; i++) {
+        const element = this[i];
+        if (obj == undefined) {
+            fn(element, i, this)
+        } else {
+            fn.call(obj, element, i, this);
+        }
+    }
+}
 ```
 **[⬆ back to top](#readme)**
 ## 数组去重
