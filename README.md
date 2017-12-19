@@ -331,7 +331,7 @@ Array.prototype.mysome = function (fn, obj) {
 ## 仿ECMAScript5中Array.find()函数
 ```js
 Array.prototype.myfind = function (fn, obj) {
-    let res = null;
+    let res = undefined;
     for (let i = 0; i < this.length; i++) {
         const element = this[i];
         if (obj == undefined) {
@@ -355,7 +355,7 @@ Array.prototype.myfind = function (fn, obj) {
 ## 仿ECMAScript5中Array.findIndex()函数
 ```js
 Array.prototype.myfindIndex = function (fn, obj) {
-    let res = null;
+    let res = undefined;
     for (let i = 0; i < this.length; i++) {
         const element = this[i];
         if (obj == undefined) {
