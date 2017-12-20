@@ -16,6 +16,7 @@
 - [仿ECMAScript5中Array.some()函数](#仿ecmascript5中arraysome函数)
 - [仿ECMAScript5中Array.find()函数](#仿ecmascript5中arrayfind函数)
 - [仿ECMAScript5中Array.findIndex()函数](#仿ecmascript5中arrayfindindex函数)
+- [仿Array.indexOf()函数](#仿arrayindexof函数)
 - [仿Math.max()方法实现](#仿mathmax方法不定实参函数)
 - [仿String.match()方法实现](#仿stringmatch方法实现)
 - [仿HTML5的classList属性实现](#仿html5的classlist属性)
@@ -373,6 +374,45 @@ Array.prototype.myfindIndex = function (fn, obj) {
         }
     }
     return res;
+}
+```
+**[⬆ back to top](#readme)**
+## 仿Array.indexOf()函数
+```js
+String.prototype.myindexOf = function () {
+    let index = -1;
+    let arg = arguments.length;
+    if (!arg) return index;
+    let s1 = arguments[0][0];
+    if (arg > 1) {
+        let param = arguments[1];
+        if (typeof param !== "number" || isNaN(param)) return index;
+        let len = this.length;
+        if (param < 0 && param >= -len) {
+            param += len;
+        } else if (param < -len) {
+            param = 0
+        } else if (param > len) {
+            return index;
+        }
+        for (let i = param; i < len; i++) {
+            const s2 = this[i];
+            if (s1 === s2) {
+                index = i;
+                break;
+            }
+        }
+    }
+    if (!arguments[1]) {
+        for (let i = 0; i < this.length; i++) {
+            const s2 = this[i];
+            if (s1 === s2) {
+                index = i;
+                break;
+            }
+        }
+    }
+    return index;
 }
 ```
 **[⬆ back to top](#readme)**
