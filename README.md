@@ -51,6 +51,7 @@
 - [使用canvas绘制雪花](#使用canvas绘制雪花)
 - [在Web Worker中发起同步XMLHtttpRequest](#在web-worker中发起同步xmlhtttprequest)
 - [统计字符串中每个字母的出现次数](#统计字符串中每个字母的出现次数)
+- [给HTML元素增加样式类名](#给html元素增加样式类名)
 
 ## 仿函数原型上的call()方法
 ```js
@@ -1387,7 +1388,6 @@ function statistics(str) {
 var toConsumableArray = function (arr) {
     if (Array.isArray(arr)) {
       for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
       return arr2;
     } else {
       return Array.from(arr);
@@ -1395,4 +1395,19 @@ var toConsumableArray = function (arr) {
   }
 ```
 **[⬆ back to top](#readme)**
-## 拷贝数组
+## 给HTML元素增加样式类名
+```js
+        function hasClass(ele, cls) {
+            let reg = new RegExp("(^|\\s)" + cls + "(\\s|$)");
+            return reg.test(ele.className);
+        }
+
+        function addClass(ele, cls) {
+            if (!hasClass(ele, cls)) {
+                console.log(2)
+                let newCls = ele.className.split(" ");
+                newCls.push(cls);
+                ele.className = newCls.join(" ");
+            }
+        }
+```
