@@ -52,6 +52,7 @@
 - [在Web Worker中发起同步XMLHtttpRequest](#在web-worker中发起同步xmlhtttprequest)
 - [统计字符串中每个字母的出现次数](#统计字符串中每个字母的出现次数)
 - [给HTML元素增加样式类名](#给html元素增加样式类名)
+- [写一个范围函数](#写一个范围函数)
 
 ## 仿函数原型上的call()方法
 ```js
@@ -1410,4 +1411,14 @@ var toConsumableArray = function (arr) {
                 ele.className = newCls.join(" ");
             }
         }
+```
+## 写一个范围函数
+```js
+function* range(start, end) {
+    yield start;
+    if (start === end) return;
+    yield* range(start + 1, end);
+}
+
+console.log([...range(2,6)]) //[ 2, 3, 4, 5, 6 ]
 ```
