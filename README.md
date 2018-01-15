@@ -53,6 +53,7 @@
 - [统计字符串中每个字母的出现次数](#统计字符串中每个字母的出现次数)
 - [给HTML元素增加样式类名](#给html元素增加样式类名)
 - [写一个范围函数](#写一个范围函数)
+- [写一个eval函数](#写一个eval函数)
 
 ## 仿函数原型上的call()方法
 ```js
@@ -1421,4 +1422,13 @@ function* range(start, end) {
 }
 
 console.log([...range(2,6)]) //[ 2, 3, 4, 5, 6 ]
+```
+## 写一个eval函数
+```js
+function DOMEval(code, doc) {
+	doc = doc || document;
+	var script = doc.createElement("script");
+	script.text = code;
+	doc.head.appendChild(script).parentNode.removeChild(script);
+}
 ```
