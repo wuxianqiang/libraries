@@ -54,6 +54,7 @@
 - [给HTML元素增加样式类名](#给html元素增加样式类名)
 - [写一个范围函数](#写一个范围函数)
 - [写一个eval函数](#写一个eval函数)
+- [判断空对象的函数](#判断空对象的函数)
 
 ## 仿函数原型上的call()方法
 ```js
@@ -1430,5 +1431,15 @@ function DOMEval(code, doc) {
 	var script = doc.createElement("script");
 	script.text = code;
 	doc.head.appendChild(script).parentNode.removeChild(script);
+}
+```
+## 判断空对象的函数
+```js
+function isEmptyObject(obj) {
+    var name;
+    for (name in obj) {
+        return false;
+    }
+    return true;
 }
 ```
