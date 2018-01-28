@@ -55,6 +55,7 @@
 - [写一个范围函数](#写一个范围函数)
 - [写一个eval函数](#写一个eval函数)
 - [判断空对象的函数](#判断空对象的函数)
+- [随机抽样调查](#随机抽样调查)
 
 ## 仿函数原型上的call()方法
 ```js
@@ -1414,6 +1415,7 @@ var toConsumableArray = function (arr) {
             }
         }
 ```
+**[⬆ back to top](#readme)**
 ## 写一个范围函数
 ```js
 function* range(start, end) {
@@ -1424,6 +1426,7 @@ function* range(start, end) {
 
 console.log([...range(2,6)]) //[ 2, 3, 4, 5, 6 ]
 ```
+**[⬆ back to top](#readme)**
 ## 写一个eval函数
 ```js
 function DOMEval(code, doc) {
@@ -1433,6 +1436,7 @@ function DOMEval(code, doc) {
 	doc.head.appendChild(script).parentNode.removeChild(script);
 }
 ```
+**[⬆ back to top](#readme)**
 ## 判断空对象的函数
 ```js
 function isEmptyObject(obj) {
@@ -1443,3 +1447,22 @@ function isEmptyObject(obj) {
     return true;
 }
 ```
+**[⬆ back to top](#readme)**
+## 随机抽样调查
+```js
+let ary = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+let newAry = [];
+
+for (let i = 0; i < 5; i++) {
+    let num = Math.round(Math.random() * 9);
+    let value = ary[num];
+    newAry.push(value)
+
+    ary[num] = ary[ary.length - 1];
+    ary.length--;
+}
+
+console.log(newAry);
+```
+**[⬆ back to top](#readme)**
