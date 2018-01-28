@@ -56,6 +56,7 @@
 - [写一个eval函数](#写一个eval函数)
 - [判断空对象的函数](#判断空对象的函数)
 - [随机抽样调查](#随机抽样调查)
+- [求数组中的最大数](#求数组中的最大数)
 
 ## 仿函数原型上的call()方法
 ```js
@@ -1464,5 +1465,21 @@ for (let i = 0; i < 5; i++) {
 }
 
 console.log(newAry);
+```
+**[⬆ back to top](#readme)**
+## 求数组中的最大数
+```js
+let ary = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+Math.max.apply(null, ary);
+Math.max(...ary);
+
+function max(ary) {
+    let max = ary[0];
+    for (const item of ary) {
+        max = max > item ? max : item;
+    }
+    return max;
+}
 ```
 **[⬆ back to top](#readme)**
