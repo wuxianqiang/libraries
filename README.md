@@ -57,6 +57,7 @@
 - [判断空对象的函数](#判断空对象的函数)
 - [随机抽样调查](#随机抽样调查)
 - [求数组中的最大数](#求数组中的最大数)
+- [字符串的repeat的方法模仿](#字符串的repeat的方法模仿)
 
 ## 仿函数原型上的call()方法
 ```js
@@ -1483,3 +1484,21 @@ function max(ary) {
 }
 ```
 **[⬆ back to top](#readme)**
+## 字符串的repeat的方法模仿
+```js
+var repeat = function (str, n) {
+    var res = '';
+    while (n) {
+        if (n % 2 === 1) {
+            res += str;
+        }
+        if (n > 1) {
+            str += str;
+        }
+        n >>= 1;
+    }
+    return res
+};
+
+console.log(repeat("*", 6));
+```
