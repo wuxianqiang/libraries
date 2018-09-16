@@ -1,6 +1,7 @@
 # libraries
 
 # 目录
+- [插入排序算法](#插入排序算法)
 - [仿函数原型上的call()方法](#仿函数原型上的call方法)
 - [仿数组原型上的push()方法](#仿数组原型上的push方法)
 - [仿ES6中的Array.of()方法](#仿es6中的arrayof方法)
@@ -58,6 +59,21 @@
 - [随机抽样调查](#随机抽样调查)
 - [求数组中的最大数](#求数组中的最大数)
 - [字符串的repeat的方法模仿](#字符串的repeat的方法模仿)
+
+## 插入排序算法
+```js
+function insert_sort (A) {
+  for (let j = 1, len = A.length; j < len; j++) {
+    const key = A[j]
+    let i = j - 1
+    while (i >= 0 && A[i] > key) {
+      A[i + 1] = A[i]
+      i--
+    }
+    A[i + 1] = key
+  }
+}
+```
 
 ## 仿函数原型上的call()方法
 ```js
