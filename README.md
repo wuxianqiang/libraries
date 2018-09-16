@@ -2,6 +2,9 @@
 
 # 目录
 - [插入排序算法](#插入排序算法)
+- [函数防抖](#函数防抖)
+- [函数节流](#函数节流)
+- [数组展平](#数组展平)
 - [仿函数原型上的call()方法](#仿函数原型上的call方法)
 - [仿数组原型上的push()方法](#仿数组原型上的push方法)
 - [仿ES6中的Array.of()方法](#仿es6中的arrayof方法)
@@ -72,6 +75,44 @@ function insert_sort (A) {
     }
     A[i + 1] = key
   }
+}
+```
+
+## 函数防抖
+```js
+function throttle (func, delay = 300, I = null) {
+  return (...args) => {
+    clearTimeout(I)
+    I = setTimeout(func.bind(null, ...args), delay)
+  }
+}
+```
+
+## 函数节流
+```js
+function throttle (func, delay = 60) {
+  let lock = false
+  return (...args) => {
+    if (lock) {
+      return
+    }
+    func(...args)
+    lock = true
+    setTimeout(() => {
+      lock = false
+    })
+  }
+}
+```
+
+## 数组展平
+```js
+function flatten (arr) {
+  return [].concat(
+    ...arr.map(x => 
+      Array.isArray(x) ? flatten(x) : x
+    )
+  )
 }
 ```
 
