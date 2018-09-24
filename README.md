@@ -5,6 +5,7 @@
 - [函数防抖](#函数防抖)
 - [函数节流](#函数节流)
 - [数组展平](#数组展平)
+- [寻找最大值](#寻找最大值)
 - [仿函数原型上的call()方法](#仿函数原型上的call方法)
 - [仿数组原型上的push()方法](#仿数组原型上的push方法)
 - [仿ES6中的Array.of()方法](#仿es6中的arrayof方法)
@@ -113,6 +114,18 @@ function flatten (arr) {
       Array.isArray(x) ? flatten(x) : x
     )
   )
+}
+```
+
+## 寻找最大值
+```js
+// O(n)的算法
+function find_max (arr) {
+  let max = Number.NEGATIVE_INFINITY
+  for (let i = 0, len = arr.length; i < len; i++) {
+    max = (arr[i] > max ? arr[i] : max)
+  }
+  return max
 }
 ```
 
