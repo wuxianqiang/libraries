@@ -13,6 +13,8 @@
 - [仿ES6中的Array.of()方法](#仿es6中的arrayof方法)
 - [仿ECMAScript5中Object.create()函数](#仿ecmascript5中objectcreate函数)
 - [仿ECMAScript5中String.trim()函数](#仿ecmascript5中stringtrim函数)
+- [仿ECMAScript5中String.padstart()函数](#仿ecmascript5中stringpadstart函数)
+- [仿ECMAScript5中String.padend()函数](#仿ecmascript5中stringpadend函数)
 - [仿ECMAScript5中Array.reduce()函数](#仿ecmascript5中arrayreduce函数)
 - [仿ECMAScript5中Object.keys()函数](#仿ecmascript5中objectkeys函数)
 - [仿ECMAScript5中Function.bind()函数](#仿ecmascript5中functionbind函数)
@@ -162,6 +164,26 @@ const foo = curry ((a, b, c, d) => {
   return a + b + c + d
 })
 foo(1)(2)(3)(4)
+```
+
+## 仿ECMAScript5中String.padEnd()函数
+```js
+String.prototype.mypadEnd = function (num, replacer) {
+  var len = ('' + this).length;
+  return this + (Array(
+    num > len ? num - len + 1 || 0 : 0
+  ).join(replacer));
+}
+```
+
+## 仿ECMAScript5中String.padStart()函数
+```js
+String.prototype.mypadStart = function (num, replacer) {
+  var len = ('' + this).length;
+  return (Array(
+    num > len ? num - len + 1 || 0 : 0
+  ).join(replacer) + this);
+}
 ```
 
 ## 仿函数原型上的call()方法
