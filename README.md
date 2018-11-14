@@ -1629,3 +1629,21 @@ var repeat = function (str, n) {
 
 console.log(repeat("*", 6));
 ```
+### 数组中concat模仿
+```js
+function concat( first, second ) {
+  var len = +second.length,
+    j = 0,
+    i = first.length;
+
+  for ( ; j < len; j++ ) {
+    first[ i++ ] = second[ j ];
+  }
+
+  first.length = i;
+
+  return first;
+}
+
+let res = concat([1,2,3], [1,2,3])
+```
