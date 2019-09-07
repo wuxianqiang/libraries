@@ -7,6 +7,8 @@
 - [数组展平](#数组展平)
 - [寻找最大值](#寻找最大值)
 - [冒泡排序](#冒泡排序)
+- [实现sleep函数](#实现sleep函数)
+- [实现所有对象的深度克隆](#实现所有对象的深度克隆)
 - [foo(1)(2)(3)(4)实现1+2+3+4](#foo1234实现1234)
 - [仿函数原型上的call()方法](#仿函数原型上的call方法)
 - [仿数组原型上的push()方法](#仿数组原型上的push方法)
@@ -105,7 +107,7 @@ function throttle (func, delay = 60) {
     lock = true
     setTimeout(() => {
       lock = false
-    })
+    }, delay)
   }
 }
 ```
@@ -1646,4 +1648,34 @@ function concat( first, second ) {
 }
 
 let res = concat([1,2,3], [1,2,3])
+```
+
+### 实现sleep函数
+```js
+function sleep (ms) {
+  let start = Date.now();
+  let expire = start + ms;
+  while (Date.now() < expire) {}
+  console.log(1)
+}
+
+sleep(500)
+```
+### 实现说有对象的深度克隆
+```js
+function deepClone (obj, hash = new WeakMap()) {
+  if (obj == null) return obj;
+  if (obj instanceof Date) return new Date(obj);
+  if (obj instanceof RegExp) return new RegExp(obj);
+  if (typeof obj !== 'object') return obj;
+  if (hash.has(obj)) return hash.get(obj);
+  let cloneObj = new obj.constructor;
+  hash.set(obj, cloneObj);
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      cloneObj[key] = obj[key];
+    }
+  }
+  return cloneObj;
+}
 ```
