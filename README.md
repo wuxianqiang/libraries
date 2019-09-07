@@ -1661,7 +1661,7 @@ function sleep (ms) {
 
 sleep(500)
 ```
-### 实现说有对象的深度克隆
+### 实现所有对象的深度克隆
 ```js
 function deepClone (obj, hash = new WeakMap()) {
   if (obj == null) return obj;
@@ -1677,5 +1677,72 @@ function deepClone (obj, hash = new WeakMap()) {
     }
   }
   return cloneObj;
+}
+```
+### 实现node的events模块
+```js
+function EventEmitter() {
+  EventEmitter.init.call(this);
+}
+
+EventEmitter.init = function () {
+  if (this._events === undefined) {
+    this._events = Object.create(null);
+    this._eventsCount = 0;
+  }
+}
+
+EventEmitter.prototype.addListener = function addListener(type, listener) {
+  return _addListener(this, type, listener)
+}
+
+function _addListener(target, type, listener) {
+  var events;
+  var existing;
+  events = target._events;
+  if (events === undefined) {
+    events = target._events = Object.create(null);
+    target._eventsCount = 0;
+  } else {
+    existing = events[type]
+  }
+  if (existing === undefined) {
+    events[type] = listener;
+    ++target._eventsCount;
+  } else {
+    if (typeof existing === 'function') {
+      existing = events[type] = [existing, listener]
+    } else {
+      existing.push(listener)
+    }
+  }
+  return target
+}
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener
+
+EventEmitter.prototype.emit = function emit(type, ...args) {
+  const events = this._events;
+  const handler = events[type];
+  if (handler === undefined) {
+    return false
+  }
+  if (typeof handler === 'function') {
+    Reflect.apply(handler, this, args)
+  } else {
+    let len = handler.length;
+    const listeners = arrayClone(handler, len);
+    for (var i = 0; i < len; ++i) {
+      Reflect.apply(listeners[i], this, args)
+    }
+  }
+}
+
+function arrayClone(arr, n) {
+  var copy = new Array(n);
+  for (var i = 0; i < n; ++i) {
+    copy[i] = arr[i];
+  }
+  return copy;
 }
 ```
