@@ -89,7 +89,7 @@ function insert_sort (A) {
 
 ## 函数防抖
 ```js
-function throttle (func, delay = 300, I = null) {
+function debounce (func, delay = 300, I = null) {
   return (...args) => {
     clearTimeout(I)
     I = setTimeout(func.bind(null, ...args), delay)
