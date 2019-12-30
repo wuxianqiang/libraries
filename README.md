@@ -72,6 +72,7 @@
 - [求数组中的最大数](#求数组中的最大数)
 - [字符串的repeat的方法模仿](#字符串的repeat的方法模仿)
 - [求两数之和](#求两数之和)
+- [二叉树翻转](#二叉树翻转)
 
 ## 插入排序算法
 ```js
@@ -1761,6 +1762,19 @@ function solution(nums, target) {
         console.log(i, j)
       }
     }
+  }
+}
+```
+### 二叉树翻转
+```js
+// 问题描述：根据二叉树的数据结构，需要将二叉树各节点左右翻转
+function reverse(node) {
+  if (node != null) {
+    let temp = node.left;
+    node.left = node.right;
+    node.right = temp;
+    reverse(node.left);
+    reverse(node.right);
   }
 }
 ```
