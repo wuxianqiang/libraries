@@ -71,6 +71,7 @@
 - [随机抽样调查](#随机抽样调查)
 - [求数组中的最大数](#求数组中的最大数)
 - [字符串的repeat的方法模仿](#字符串的repeat的方法模仿)
+- [求两数之和](#求两数之和)
 
 ## 插入排序算法
 ```js
@@ -1746,5 +1747,20 @@ function arrayClone(arr, n) {
     copy[i] = arr[i];
   }
   return copy;
+}
+```
+### 求两数之和
+```js
+// 问题描述：给定一个数组，数组里面有两个数，他们的和已知是target，求这两个数在数组中的位置
+function solution(nums, target) {
+  for (let i = 0; i < nums.length; i++) {
+    let a = nums[i]
+    for (let j = i + 1; j < nums.length; j++) {
+      let b = nums[j]
+      if (b === target - a) {
+        console.log(i, j)
+      }
+    }
+  }
 }
 ```
