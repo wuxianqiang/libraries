@@ -1778,3 +1778,21 @@ function reverse(node) {
   }
 }
 ```
+### 二分查找法模板
+```js
+function binary_search_1(left, right) {
+  while (left < right) {
+    // 选择左中位数
+    let mid = (left + right) >> 1
+    if (check(mid)) {
+      // 先写可以排除中位数的逻辑
+      left = mid + 1
+    } else {
+      // 右边不能排除
+      right = mid
+    }
+  }
+  // 退出循环的时候，视情况，是否需要单独判断left（或者right）
+  return left
+}
+```
