@@ -11,6 +11,8 @@
 - [实现node的events模块](#实现node的events模块)
 - [JS继承实现的6种方式](https://github.com/wuxianqiang/blog/issues/31)
 - [实现所有对象的深度克隆](#实现所有对象的深度克隆)
+- [二分查找模板](#二分查找模板)
+- [将对象转换为树结构](#将对象转换为树结构)
 - [foo(1)(2)(3)(4)实现1+2+3+4](#foo1234实现1234)
 - [仿函数原型上的call()方法](#仿函数原型上的call方法)
 - [仿数组原型上的push()方法](#仿数组原型上的push方法)
@@ -1780,7 +1782,7 @@ function reverse(node) {
 ```
 ### 二分查找法模板
 ```js
-function binary_search_1(left, right) {
+function binary_search(left, right) {
   while (left < right) {
     // 选择左中位数
     let mid = (left + right) >> 1
@@ -1794,5 +1796,58 @@ function binary_search_1(left, right) {
   }
   // 退出循环的时候，视情况，是否需要单独判断left（或者right）
   return left
+}
+```
+### 将对象转换为树结构
+```js
+const data = [
+  { id: 56, parentId: 62 },
+  { id: 81, parentId: 80 },
+  { id: 74, parentId: null },
+  { id: 76, parentId: 80 },
+  { id: 63, parentId: 62 },
+  { id: 80, parentId: 86 },
+  { id: 87, parentId: 86 },
+  { id: 62, parentId: 74 },
+  { id: 86, parentId: 74 },
+];
+let tree = {
+  id: 74,
+  parentId: null,
+  children: [
+    {
+      id: 62,
+      parentId: 74,
+      children: [{ id: 56, parentId: 62 }, { id: 63, parentId: 62 }],
+    },
+    {
+      id: 86,
+      parentId: 74,
+      children: [
+        {
+          id: 80,
+          parentId: 86,
+          children: [{ id: 81, parentId: 80 }, { id: 76, parentId: 80 }],
+        },
+        { id: 87, parentId: 86 },
+      ],
+    },
+  ],
+};
+// 无需递归即可在O（n）时间内完成
+function createTree (data) {
+  let idMap = data.reduce((prev, cur, index) => {
+    prev[cur.id] = index
+    return prev
+  }, {})
+  let root;
+  data.forEach(item => {
+    if (item.parentId === null) {
+      return root = item
+    }
+    let parentEl = data[idMap[item.parentId]]
+    parentEl.children = [...(parentEl.children || []), item]
+  })
+  return root
 }
 ```
